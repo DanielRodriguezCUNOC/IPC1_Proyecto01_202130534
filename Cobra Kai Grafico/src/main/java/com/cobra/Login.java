@@ -1,15 +1,18 @@
 package com.cobra;
+import com.cobra.util.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
     private JTextField userField;
     private JPasswordField passField;
     private JButton loginButton;
     Color bgColor = new Color(64,64,64);
-    CustomFonts cf = new CustomFonts();
+    Utilidades util = new Utilidades();
 
     public Login() {
         setTitle("Login");
@@ -23,7 +26,7 @@ public class Login extends JFrame {
         //Label titulo
         JLabel titleLabel = new JLabel("Inicio Sesion Cobra Kai Dojo");
         titleLabel.setBounds(100, 20, 400, 30);
-        titleLabel.setFont(cf.getFont(2));
+        titleLabel.setFont(util.getFont(2));
         titleLabel.setForeground(Color.WHITE);
         add(titleLabel);
 
@@ -31,7 +34,7 @@ public class Login extends JFrame {
         JLabel userLabel = new JLabel("Usuario:");
         userLabel.setBounds(100, 100, 100, 25);
         userLabel.setForeground(Color.WHITE);
-        userLabel.setFont(cf.getFont(1));
+        userLabel.setFont(util.getFont(1));
         add(userLabel);
 
         userField = new JTextField();
@@ -44,7 +47,7 @@ public class Login extends JFrame {
         JLabel passLabel = new JLabel("Contraseña:");
         passLabel.setBounds(100, 150, 100, 25);
         passLabel.setForeground(Color.WHITE);
-        passLabel.setFont(cf.getFont(1));
+        passLabel.setFont(util.getFont(1));
         add(passLabel);
 
         passField = new JPasswordField();
@@ -58,21 +61,12 @@ public class Login extends JFrame {
         loginButton.setBounds(200, 200, 150, 25);
         loginButton.setBackground(Color.WHITE);
         loginButton.setForeground(Color.BLACK);
-        loginButton.setFont(cf.getFont(1));
+        loginButton.setFont(util.getFont(1));
         loginButton.setFocusPainted(false);
         loginButton.setBorder(BorderFactory.createLineBorder(bgColor, 0, false));
         //Agregamos un efecto hover
-        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                loginButton.setBackground(Color.BLACK);
-                loginButton.setForeground(Color.WHITE);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                loginButton.setBackground(Color.WHITE);
-                loginButton.setForeground(Color.BLACK);
-            }
-        });
+        util.efectosBotones(loginButton);
+        //Agregamos un evento al botón
         loginButton.addActionListener((ActionEvent e) -> {
             String user = userField.getText();
             String pass = new String(passField.getPassword());
@@ -88,6 +82,5 @@ public class Login extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
 
 }
