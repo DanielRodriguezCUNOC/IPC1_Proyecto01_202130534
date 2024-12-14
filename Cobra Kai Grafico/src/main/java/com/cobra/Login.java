@@ -1,17 +1,16 @@
 package com.cobra;
-import com.cobra.util.*;
+
+import com.cobra.util.Utilidades;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
     private JTextField userField;
     private JPasswordField passField;
     private JButton loginButton;
-    Color bgColor = new Color(64,64,64);
+    Color bgColor = new Color(64, 64, 64);
     Utilidades util = new Utilidades();
 
     public Login() {
@@ -40,6 +39,7 @@ public class Login extends JFrame {
         userField = new JTextField();
         userField.setBounds(200, 100, 150, 25);
         userField.setForeground(Color.BLACK);
+        userField.setFont(util.getFont(5));
         userField.setBorder(BorderFactory.createLineBorder(bgColor, 0, false));
         userField.setBackground(Color.WHITE);
         add(userField);
@@ -53,6 +53,7 @@ public class Login extends JFrame {
         passField = new JPasswordField();
         passField.setBounds(200, 150, 150, 25);
         passField.setForeground(Color.BLACK);
+        passField.setFont(util.getFont(5));
         passField.setBorder(BorderFactory.createLineBorder(bgColor, 0, false));
         passField.setBackground(Color.WHITE);
         add(passField);
@@ -61,7 +62,6 @@ public class Login extends JFrame {
         loginButton.setBounds(200, 200, 150, 25);
         loginButton.setBackground(Color.WHITE);
         loginButton.setForeground(Color.BLACK);
-        loginButton.setFont(util.getFont(1));
         loginButton.setFocusPainted(false);
         loginButton.setBorder(BorderFactory.createLineBorder(bgColor, 0, false));
         //Agregamos un efecto hover
@@ -72,7 +72,11 @@ public class Login extends JFrame {
             String pass = new String(passField.getPassword());
 
             if (user.equals("admin") && pass.equals("1234")) {
-                JOptionPane.showMessageDialog(this, "Login exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                int opcion = JOptionPane.showConfirmDialog(this, "Login exitoso!", "Éxito", JOptionPane.OK_CANCEL_OPTION);
+                if (opcion == JOptionPane.OK_OPTION) {
+                    new AdminView(); //Iniciamos la vista de administrador
+                    dispose();//Cerramos la ventana de login
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
             }

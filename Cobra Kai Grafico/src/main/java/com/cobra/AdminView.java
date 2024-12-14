@@ -1,9 +1,10 @@
 package com.cobra;
-import com.cobra.util.*;
+
+import com.cobra.util.Utilidades;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
 public class AdminView extends JFrame {
 
@@ -20,7 +21,7 @@ public class AdminView extends JFrame {
 
         // Título principal
         JLabel titleTablaClientes = new JLabel("Clientes registrados");
-        titleTablaClientes.setBounds(20, 10, 200, 25);
+        titleTablaClientes.setBounds(20, 10, 300, 30);
         titleTablaClientes.setFont(util.getFont(2));
         titleTablaClientes.setForeground(Color.WHITE);
         add(titleTablaClientes);
@@ -33,15 +34,16 @@ public class AdminView extends JFrame {
         };
         JTable clientTable = new JTable(data, columnNames);
         clientTable.setBounds(20, 50, 400, 100);
-        clientTable.setRowHeight(25);
-        clientTable.setBorder(BorderFactory.createLineBorder(Color.BLACK,0, false));
+        clientTable.setRowHeight(30);
+        clientTable.setFont(util.getFont(4));
+        clientTable.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
         JScrollPane tableScrollPane = new JScrollPane(clientTable);
-        tableScrollPane.setBounds(20, 50, 400, 100);
+        tableScrollPane.setBounds(20, 50, 400, 180);
         add(tableScrollPane);
 
         // Botón "Guardar información"
         JButton saveButton = new JButton("Guardar información");
-        saveButton.setBounds(20, 160, 200, 30);
+        saveButton.setBounds(20, 250, 200, 30);
         saveButton.setBackground(Color.WHITE);
         saveButton.setFocusPainted(false);
         saveButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -55,29 +57,29 @@ public class AdminView extends JFrame {
 
         // Botones para módulos
         JButton productModuleButton = new JButton("Módulo de productos");
-        productModuleButton.setBounds(450, 50, 150, 30);
+        productModuleButton.setBounds(450, 50, 200, 30);
         productModuleButton.setBackground(Color.WHITE);
         productModuleButton.setFocusPainted(false);
-        productModuleButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0 , false));
+        productModuleButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
 
         JButton clientModuleButton = new JButton("Módulo de clientes");
-        clientModuleButton.setBounds(450, 90, 150, 30);
+        clientModuleButton.setBounds(450, 120, 150, 30);
         clientModuleButton.setBackground(Color.WHITE);
         clientModuleButton.setFocusPainted(false);
         clientModuleButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
 
         JButton salesModuleButton = new JButton("Módulo de ventas");
-        salesModuleButton.setBounds(450, 130, 150, 30);
+        salesModuleButton.setBounds(450, 190, 150, 30);
         salesModuleButton.setBackground(Color.WHITE);
         salesModuleButton.setFocusPainted(false);
         salesModuleButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
 
         //Agregamos efectos a los botones
-        eventosBototnes(saveButton,1);
-        eventosBototnes(logoutButton,2);
-        eventosBototnes(productModuleButton,3);
-        eventosBototnes(clientModuleButton,4);
-        eventosBototnes(salesModuleButton,5);
+        eventosBotones(saveButton, 1);
+        eventosBotones(logoutButton, 2);
+        eventosBotones(productModuleButton, 3);
+        eventosBotones(clientModuleButton, 4);
+        eventosBotones(salesModuleButton, 5);
 
         //Agregamos los botones al frame
         add(saveButton);
@@ -89,30 +91,34 @@ public class AdminView extends JFrame {
         setVisible(true);
     }
 
-    private void eventosBototnes(JButton button, int option){
-       util.efectosBotones(button);
+    private void eventosBotones(JButton button, int option) {
+        util.efectosBotones(button);
         //Agregar funcionalidad a los botones
         button.addActionListener((ActionEvent e) -> {
-            switch (option){
+            switch (option) {
                 case 1:
                     //Lógica para guardar información
                     JOptionPane.showMessageDialog(this, "Info Guardada", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 2:
                     //Lógica para cerrar sesión
-                    JOptionPane.showMessageDialog(this, "Sesion Cerrada", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    new Login();
+                    dispose();
                     break;
                 case 3:
                     //Lógica para abrir módulo de productos
-                    JOptionPane.showMessageDialog(this, "Modulo Porductos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    new ProductModule();
+                    dispose();
                     break;
                 case 4:
                     //Lógica para abrir módulo de clientes
-                    JOptionPane.showMessageDialog(this, "Modulo Clientes", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    new ClientModule();
+                    dispose();
                     break;
                 case 5:
                     //Lógica para abrir módulo de ventas
-                    JOptionPane.showMessageDialog(this, "Modulo Ventas", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    new SaleModule();
+                    dispose();
                     break;
             }
         });

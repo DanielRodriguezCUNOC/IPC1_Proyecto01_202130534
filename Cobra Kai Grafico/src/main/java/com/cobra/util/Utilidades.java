@@ -7,17 +7,18 @@ import java.awt.event.MouseEvent;
 
 public class Utilidades {
 
-    public Font getFont(int font){
+    public Font getFont(int font) {
         return switch (font) {
             case 1 -> new Font("Arial", Font.BOLD, 16);
             case 2 -> new Font("Helvetica", Font.BOLD, 24);
             case 3 -> new Font("Courier New", Font.ITALIC, 16);
-            case 4 -> new Font("Tahoma", Font.BOLD, 16);
-            default -> new Font("Times New Roman", Font.PLAIN, 16);
+            case 4 -> new Font("Tahoma", Font.BOLD, 14);
+            case 5 -> new Font("Open Sans", Font.BOLD, 18);
+            default -> new Font("Times New Roman", Font.BOLD, 16);
         };
     }
 
-    public void efectosBotones(JButton button){
+    public void efectosBotones(JButton button) {
         button.setFont(getFont(1));
         //Agregamos efectos a los botones
         button.addMouseListener(new MouseAdapter() {
