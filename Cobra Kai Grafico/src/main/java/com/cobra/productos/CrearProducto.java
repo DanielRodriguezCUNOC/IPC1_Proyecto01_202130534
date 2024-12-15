@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class CrearProducto extends JFrame {
+    ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     Utilidades util = new Utilidades();
     JTextField txtNombreProducto = new JTextField();
     JTextField txtPrecioProducto = new JTextField();
@@ -66,18 +67,35 @@ public class CrearProducto extends JFrame {
     private void eventoBotonGuardarProducto(JButton button) {
         util.efectosBotones(button);
         button.addActionListener((ActionEvent e) -> {
-            if (txtNombreProducto.getText().isEmpty() || txtPrecioProducto.getText().isEmpty() || txtCantidadProducto.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Producto guardado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
-                String nombreProducto = txtNombreProducto.getText();
-                int precioProducto = Integer.parseInt(txtPrecioProducto.getText());
-                int cantidadProducto = Integer.parseInt(txtCantidadProducto.getText());
-                new ProductModule();
-                dispose();
-            }
+            accionesBotones();
         });
 
+    }
+
+    private void accionesBotones() {
+        if (txtNombreProducto.getText().isEmpty() || txtPrecioProducto.getText().isEmpty() || txtCantidadProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String nombreProducto = txtNombreProducto.getText();
+            double precioProducto = Double.parseDouble(txtPrecioProducto.getText());
+            int cantidadProducto = Integer.parseInt(txtCantidadProducto.getText());
+            controlProductosDAO.addProductoIndividual(nombreProducto, precioProducto, cantidadProducto);
+            if (controlProductosDAO.getConfirmarAccion()) {
+                JOptionPane.showMessageDialog(this, "Producto agregado correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha podido agregar el producto, revise los datos ingresados", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        int option = JOptionPane.showConfirmDialog(this, "Desea agregar otro producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.NO_OPTION) {
+            new ProductModule();
+            dispose();
+        } else {
+            txtNombreProducto.setText("");
+            txtPrecioProducto.setText("");
+            txtCantidadProducto.setText("");
+        }
     }
 
 }

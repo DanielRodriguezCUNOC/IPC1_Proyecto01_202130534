@@ -1,5 +1,7 @@
 package com.cobra;
 
+import com.cobra.clientes.CrearCliente;
+import com.cobra.clientes.EditarCliente;
 import com.cobra.util.Utilidades;
 
 import javax.swing.*;
@@ -51,10 +53,10 @@ public class ClientModule extends JFrame {
         button.addActionListener((e) -> {
             switch (option) {
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Crear Cliente");
+                    new CrearCliente();
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Editar Cliente");
+                    new EditarCliente();
                     break;
                 case 3:
                     new AdminView();

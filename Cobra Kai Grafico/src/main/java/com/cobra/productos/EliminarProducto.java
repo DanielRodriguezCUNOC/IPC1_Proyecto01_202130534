@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EliminarProducto extends JFrame {
+    ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     JComboBox<String> productComboBox;
     JButton btnEliminarProducto;
     Utilidades util = new Utilidades();
@@ -26,13 +27,10 @@ public class EliminarProducto extends JFrame {
         lblNombreProducto.setForeground(Color.WHITE);
         add(lblNombreProducto);
 
-        productComboBox = new JComboBox<>();
+        productComboBox = new JComboBox<>(controlProductosDAO.getNombresProductos().toArray(new String[0]));
         productComboBox.setBounds(240, 80, 200, 30);
-        productComboBox.addItem("Traje");
-        productComboBox.addItem("Cinta Negra");
-        productComboBox.addItem("Cinta Amarilla");
-        productComboBox.addItem("Cinta Roja");
-        productComboBox.addItem("Cinta Verde");
+        productComboBox.setFont(util.getFont(1));
+
         add(productComboBox);
 
         btnEliminarProducto = new JButton("Eliminar producto");
@@ -49,22 +47,32 @@ public class EliminarProducto extends JFrame {
     private void eventoBoton(JButton button) {
         util.efectosBotones(button);
         button.addActionListener(e -> {
-            String selectedProduct = (String) productComboBox.getSelectedItem();
-            if (selectedProduct != null && !selectedProduct.isEmpty()) {
-                int confirmation = JOptionPane.showConfirmDialog(this,
-                        "¿Estás seguro de eliminar " + selectedProduct + "?",
-                        "Confirmar Eliminación",
-                        JOptionPane.YES_NO_OPTION);
-                if (confirmation == JOptionPane.YES_OPTION) {
-                    //  dao.deleteProduct(selectedProduct);
-                    JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
-                    //  refreshProductList();
-                }
-                new ProductModule();
-                this.dispose();
-
-            }
+            accionBoton();
         });
 
+    }
+
+    private void accionBoton() {
+        String selectedProduct = (String) productComboBox.getSelectedItem();
+        // Verificamos si se ha seleccionado un producto
+        if (selectedProduct != null && !selectedProduct.isEmpty()) {
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de eliminar " + selectedProduct + "?",
+                    "Confirmar Eliminación",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirmation == JOptionPane.YES_OPTION) {
+                controlProductosDAO.deleteProducto(selectedProduct);
+                JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
+                productComboBox.removeItem(selectedProduct); // Actualizamos el combobox
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un producto para eliminar.");
+        }
+        // Preguntamos si desea eliminar otro producto
+        int option = JOptionPane.showConfirmDialog(this, "¿Deseas eliminar otro producto?", "Eliminar Producto", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.NO_OPTION) {
+            new ProductModule();
+            this.dispose();
+        }
     }
 }

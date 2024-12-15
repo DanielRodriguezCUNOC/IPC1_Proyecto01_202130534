@@ -1,6 +1,7 @@
 package com.cobra;
 
 import com.cobra.util.Utilidades;
+import com.cobra.ventas.RealizarVenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +50,7 @@ public class SaleModule extends JFrame {
         button.addActionListener((e) -> {
             switch (option) {
                 case 1:
-                    JOptionPane.showMessageDialog(null, "Crear Venta");
+                    new RealizarVenta();
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Crear Reporte de Ventas");
