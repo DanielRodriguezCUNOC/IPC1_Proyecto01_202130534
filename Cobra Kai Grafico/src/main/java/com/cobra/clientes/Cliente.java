@@ -1,6 +1,11 @@
 package com.cobra.clientes;
 
-public class Cliente {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String nit;
     private int cantidadCompras;

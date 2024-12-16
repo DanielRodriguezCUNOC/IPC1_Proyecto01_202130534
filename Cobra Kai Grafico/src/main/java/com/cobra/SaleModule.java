@@ -56,6 +56,7 @@ public class SaleModule extends JFrame {
                     break;
                 case 2:
                     new ReporteHistoricoVentas();
+                    new AdminView();
                     dispose();
                     break;
                 case 3:

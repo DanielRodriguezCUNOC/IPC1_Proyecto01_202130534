@@ -29,7 +29,7 @@ public class ControlVentasDAO {
         listadoVentas.add(venta);
     }
 
-    //Al realizar una venta se añaden los productos vendidos a la lista de productos vendidos
+    //Al realizar una venta los productos son añadidos a la lista
     public void addProductosVendidos(String nombreProducto, int cantidadVendida) {
         double precioUnitario = controlProductosDAO.getPrecioProducto(nombreProducto);
         ProductoVendido productoVendido = new ProductoVendido(nombreProducto, cantidadVendida, precioUnitario);
