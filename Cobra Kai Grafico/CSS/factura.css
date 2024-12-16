@@ -1,0 +1,70 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 2rem;
+    text-align: center;
+}
+
+h1, h2 {
+    margin-bottom: 1rem;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+}
+
+h2 {
+    color: #34495e;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Estilos de detalles */
+.detalle {
+    width: 60%;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.campo {
+    font-weight: bold;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.valor {
+    margin-left: 0.5rem;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .detalle {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    h1, h2 {
+        font-size: 1.8rem;
+    }
+
+    .campo, .valor {
+        font-size: 0.9rem;
+    }
+}
+

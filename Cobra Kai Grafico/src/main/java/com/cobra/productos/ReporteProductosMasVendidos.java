@@ -61,21 +61,13 @@ public class ReporteProductosMasVendidos {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String fechaActual = fecha.format(formato);
         //Nombre del archivo que se guardara en una ruta dentro del proyecto
-        String nombreArchivo = "reportes/toproductos/ReporteProductosMasVendidos_" + fechaActual + ".html";
+        String nombreArchivo = "REPORTES/TOPRODUCTOS/ReporteProductosMasVendidos_" + fechaActual + ".html";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             writer.write("<html>");
             writer.write("<head>");
             writer.write("<title>Reporte de productos más vendidos</title>");
-            writer.write("<style>");
-            writer.write("body { font-family: Arial, sans-serif; margin: 20px; }");
-            writer.write("h1 { color: #333; text-align: center; }");
-            writer.write("table { width: 100%; border-collapse: collapse; margin-top: 20px; }");
-            writer.write("th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }");
-            writer.write("th { background-color: #f4f4f4; font-weight: bold; }");
-            writer.write("tr:nth-child(even) { background-color: #f9f9f9; }");
-            writer.write("tr:hover { background-color: #f1f1f1; }");
-            writer.write("</style>");
+            writer.write("<link rel='stylesheet' href='CSS/toproductos.css'>");
             writer.write("</head>");
             writer.write("<body>");
             writer.write("<h1>Reporte de productos más vendidos</h1>");

@@ -1,5 +1,6 @@
 package com.cobra;
 
+import com.cobra.clientes.DatosParaTablaCliente;
 import com.cobra.util.Utilidades;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 public class AdminView extends JFrame {
 
     Utilidades util = new Utilidades();
+    DatosParaTablaCliente datosTabla;
 
     public AdminView() {
 
@@ -27,15 +29,11 @@ public class AdminView extends JFrame {
         add(titleTablaClientes);
 
         // Tabla de clientes
-        String[] columnNames = {"Cliente", "Nit", "Compras realizadas"};
-        Object[][] data = {
-                {"Erwin Vásquez", "C/F", 78},
-                {"Cliente anónimo", "1234456", 12}
-        };
-        JTable clientTable = new JTable(data, columnNames);
+        datosTabla = new DatosParaTablaCliente();
+        JTable clientTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
         clientTable.setBounds(20, 50, 400, 100);
         clientTable.setRowHeight(30);
-        clientTable.setFont(util.getFont(4));
+        clientTable.setFont(util.getFont(1));
         clientTable.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
         JScrollPane tableScrollPane = new JScrollPane(clientTable);
         tableScrollPane.setBounds(20, 50, 400, 180);

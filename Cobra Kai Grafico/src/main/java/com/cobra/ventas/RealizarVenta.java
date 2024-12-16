@@ -11,7 +11,7 @@ import java.awt.*;
 public class RealizarVenta extends JFrame {
     private final ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     private final ControlVentasDAO controlVentasDAO = ControlVentasDAO.getInstance();
-    private final ControlClienteDAO controlClienteDAO = new ControlClienteDAO();
+    private final ControlClienteDAO controlClienteDAO = ControlClienteDAO.getInstance();
     private final Utilidades util = new Utilidades();
     private GenerarFactura generarFactura;
     private JComboBox<String> clienteComboBox;
@@ -102,19 +102,28 @@ public class RealizarVenta extends JFrame {
             JOptionPane.showMessageDialog(null, "La cantidad debe ser un número válido.");
             return;
         }
+        //Verificamos que haya stock suficiente
+        if ((controlProductosDAO.getStockProducto(nombreProducto) >= cantidad) && cantidad > 0) {
+            //Obtener el precio del producto y calcular el total de la venta
+            double precioUnitario = controlProductosDAO.getPrecioProducto(nombreProducto);
+            double totalVenta = precioUnitario * cantidad;
+            String fechaVenta = util.getFecha();
 
-        //Obtener el precio del producto y calcular el total de la venta
-        double precioUnitario = controlProductosDAO.getPrecioProducto(nombreProducto);
-        double totalVenta = precioUnitario * cantidad;
-        String fechaVenta = util.getFecha();
+            //Crear una nueva venta y agregarla a la lista de ventas
+            Venta venta = new Venta(nombreCliente, controlClienteDAO.getNIT(nombreCliente), fechaVenta, totalVenta);
+            controlVentasDAO.addVenta(venta);
+            controlVentasDAO.addProductosVendidos(nombreProducto, cantidad);
+            controlVentasDAO.incrementarContadorVentas();
+            //Actualizar la cantidad de productos en el inventario
+            controlProductosDAO.restarStock(nombreProducto, cantidad);
 
-        //Crear una nueva venta y agregarla a la lista de ventas
-        Venta venta = new Venta(nombreCliente, controlClienteDAO.getNIT(nombreCliente), fechaVenta, totalVenta);
-        controlVentasDAO.addVenta(venta);
-        controlVentasDAO.addProductosVendidos(nombreProducto, cantidad);
-        //Generamos la factura
-        generarFactura = new GenerarFactura();
-        generarFactura.crearFactura(nombreCliente, nombreProducto, cantidad, fechaVenta);
-        JOptionPane.showMessageDialog(null, "Venta agregada exitosamente.");
+            //Aumentar la cantidad de compras del cliente
+            controlClienteDAO.aumentarCompras(nombreCliente);
+            //Generamos la factura
+            generarFactura = new GenerarFactura();
+            generarFactura.crearFactura(nombreCliente, nombreProducto, cantidad, fechaVenta);
+            JOptionPane.showMessageDialog(null, "Venta agregada exitosamente.");
+        }
+
     }
 }

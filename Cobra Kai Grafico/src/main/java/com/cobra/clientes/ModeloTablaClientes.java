@@ -1,4 +1,4 @@
-package com.cobra;
+package com.cobra.clientes;
 
 import javax.swing.table.AbstractTableModel;
 

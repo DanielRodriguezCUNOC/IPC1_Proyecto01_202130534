@@ -63,15 +63,20 @@ public class CrearCliente extends JFrame {
 
     private void guardarCliente() {
         String nombre = txtNombre.getText();
-        String nit = txtNit.getText();
+        String nit;
         //Verificar que todos los campos esten llenos
-        if (nombre.isEmpty() || nit.isEmpty()) {
+        if (nombre.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             //Verificar si el cliente ya existe
             if (controlClienteDAO.clienteExists(nombre)) {
                 JOptionPane.showMessageDialog(null, "El cliente ya existe", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
+                if (txtNit.getText().isEmpty()) {
+                    nit = "C/F";
+                } else {
+                    nit = txtNit.getText();
+                }
                 Cliente cliente = new Cliente(nombre, nit);
                 controlClienteDAO.addCliente(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente guardado", "Exito", JOptionPane.INFORMATION_MESSAGE);

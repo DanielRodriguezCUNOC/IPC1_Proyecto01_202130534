@@ -93,6 +93,7 @@ public class ProductModule extends JFrame {
         JTable productsTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
         productsTable.setBounds(20, 50, 400, 180);
         productsTable.setRowHeight(30);
+        productsTable.setFont(util.getFont(1));
         productsTable.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
         JScrollPane tableScrollPane = new JScrollPane(productsTable);
         tableScrollPane.setBounds(20, 50, 400, 180);

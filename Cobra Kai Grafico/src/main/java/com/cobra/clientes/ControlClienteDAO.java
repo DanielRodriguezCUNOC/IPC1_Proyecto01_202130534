@@ -62,4 +62,13 @@ public class ControlClienteDAO {
         return nombres;
     }
 
+    //Metodo para editar el nit de un cliente
+    public void editarNit(String nombreCliente, String nit) {
+        for (Cliente cliente : listadoClientes) {
+            if (cliente.getNombre().equals(nombreCliente)) {
+                cliente.setNit(nit);
+            }
+        }
+    }
+
 }

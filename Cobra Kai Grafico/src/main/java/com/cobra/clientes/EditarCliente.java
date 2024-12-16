@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class EditarCliente extends JFrame {
     Utilidades util = new Utilidades();
-    ControlClienteDAO controlClienteDAO = new ControlClienteDAO();
+    ControlClienteDAO controlClienteDAO = ControlClienteDAO.getInstance();
     JComboBox<String> clienteComboBox;
     JTextField txtNit;
 
@@ -62,17 +62,29 @@ public class EditarCliente extends JFrame {
     private void eventosBoton(JButton button) {
         util.efectosBotones(button);
         button.addActionListener((e) -> {
-            int confirmation = JOptionPane.showConfirmDialog(null, "Desea editar al cliente?", "Guardar", JOptionPane.YES_NO_OPTION);
-
-            if (confirmation == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Cliente guardado");
-                new ClientModule();
-                dispose();
-            }
+            editCliente();
         });
     }
 
     private void editCliente() {
+        int confirmation = JOptionPane.showConfirmDialog(null, "Desea editar al cliente?", "Guardar", JOptionPane.YES_NO_OPTION);
+
+        if (confirmation == JOptionPane.YES_OPTION) {
+            String selectedClient = (String) clienteComboBox.getSelectedItem();
+            String nit;
+            if (txtNit.getText().isEmpty()) {
+                nit = "C/F";
+            } else {
+                nit = txtNit.getText();
+            }
+            controlClienteDAO.editarNit(selectedClient, nit);
+            JOptionPane.showMessageDialog(null, "Cliente guardado");
+        }
+        int option = JOptionPane.showConfirmDialog(null, "Desea editar otro cliente?", "Editar Cliente", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.NO_OPTION) {
+            new ClientModule();
+            dispose();
+        }
 
     }
 }

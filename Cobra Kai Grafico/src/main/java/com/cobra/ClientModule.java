@@ -54,9 +54,11 @@ public class ClientModule extends JFrame {
             switch (option) {
                 case 1:
                     new CrearCliente();
+                    dispose();
                     break;
                 case 2:
                     new EditarCliente();
+                    dispose();
                     break;
                 case 3:
                     new AdminView();

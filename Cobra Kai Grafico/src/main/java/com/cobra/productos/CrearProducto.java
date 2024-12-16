@@ -69,7 +69,6 @@ public class CrearProducto extends JFrame {
         button.addActionListener((ActionEvent e) -> {
             accionesBotones();
         });
-
     }
 
     private void accionesBotones() {

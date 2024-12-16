@@ -64,13 +64,22 @@ public class ControlProductosDAO {
         return false;
     }
 
-    public boolean stockExists(String nombre) {
+    public int getStock(String nombre) {
         for (Producto producto : productos) {
-            if (producto.getNombre().equals(nombre) && producto.getStock() >= 0) {
-                return true;
+            if (producto.getNombre().equals(nombre)) {
+                return producto.getStock();
             }
         }
-        return false;
+        return 0;
+    }
+
+    public void restarStock(String nombre, int cantidad) {
+        for (Producto producto : productos) {
+            if (producto.getNombre().equals(nombre)) {
+                producto.setStock(producto.getStock() - cantidad);
+                break;
+            }
+        }
     }
 
     public void editarProducto(String nombre, double precio, int stock) {

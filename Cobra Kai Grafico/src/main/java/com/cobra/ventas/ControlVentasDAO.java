@@ -9,10 +9,12 @@ public class ControlVentasDAO {
     private final ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     private final ArrayList<Venta> listadoVentas;
     private final ArrayList<ProductoVendido> productosVendidos;
+    private int contadorVentas;
 
     private ControlVentasDAO() {
         listadoVentas = new ArrayList<>();
         productosVendidos = new ArrayList<>();
+        contadorVentas = 0;
     }
 
     public static ControlVentasDAO getInstance() {
@@ -26,7 +28,7 @@ public class ControlVentasDAO {
     public void addVenta(Venta venta) {
         listadoVentas.add(venta);
     }
-    
+
     //Al realizar una venta se añaden los productos vendidos a la lista de productos vendidos
     public void addProductosVendidos(String nombreProducto, int cantidadVendida) {
         double precioUnitario = controlProductosDAO.getPrecioProducto(nombreProducto);
@@ -40,5 +42,13 @@ public class ControlVentasDAO {
 
     public ArrayList<ProductoVendido> getProductosVendidos() {
         return productosVendidos;
+    }
+
+    public int getContadorVentas() {
+        return contadorVentas;
+    }
+
+    public void incrementarContadorVentas() {
+        contadorVentas++;
     }
 }

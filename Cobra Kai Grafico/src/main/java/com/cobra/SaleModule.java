@@ -2,6 +2,7 @@ package com.cobra;
 
 import com.cobra.util.Utilidades;
 import com.cobra.ventas.RealizarVenta;
+import com.cobra.ventas.ReporteHistoricoVentas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,9 +52,11 @@ public class SaleModule extends JFrame {
             switch (option) {
                 case 1:
                     new RealizarVenta();
+                    dispose();
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, "Crear Reporte de Ventas");
+                    new ReporteHistoricoVentas();
+                    dispose();
                     break;
                 case 3:
                     new AdminView();
