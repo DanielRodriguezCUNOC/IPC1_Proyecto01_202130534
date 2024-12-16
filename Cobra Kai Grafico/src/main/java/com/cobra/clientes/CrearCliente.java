@@ -8,7 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CrearCliente extends JFrame {
-    Utilidades util = new Utilidades();
+    private ControlClienteDAO controlClienteDAO = ControlClienteDAO.getInstance();
+    private Utilidades util = new Utilidades();
+    private JTextField txtNombre;
+    private JTextField txtNit;
 
     public CrearCliente() {
         setTitle("Crear Cliente");
@@ -25,7 +28,7 @@ public class CrearCliente extends JFrame {
         lblNombre.setFont(util.getFont(1));
         add(lblNombre);
 
-        JTextField txtNombre = new JTextField();
+        txtNombre = new JTextField();
         txtNombre.setBounds(120, 20, 200, 30);
         txtNombre.setFont(util.getFont(5));
         add(txtNombre);
@@ -36,7 +39,7 @@ public class CrearCliente extends JFrame {
         lblNit.setFont(util.getFont(1));
         add(lblNit);
 
-        JTextField txtNit = new JTextField();
+        txtNit = new JTextField();
         txtNit.setBounds(120, 70, 200, 30);
         txtNit.setFont(util.getFont(5));
         add(txtNit);
@@ -54,11 +57,27 @@ public class CrearCliente extends JFrame {
     private void eventoBoton(JButton button) {
         util.efectosBotones(button);
         button.addActionListener((e) -> {
-            JOptionPane.showMessageDialog(null, "Cliente guardado");
-            new ClientModule();
-            dispose();
+            guardarCliente();
         });
+    }
 
-
+    private void guardarCliente() {
+        String nombre = txtNombre.getText();
+        String nit = txtNit.getText();
+        //Verificar que todos los campos esten llenos
+        if (nombre.isEmpty() || nit.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            //Verificar si el cliente ya existe
+            if (controlClienteDAO.clienteExists(nombre)) {
+                JOptionPane.showMessageDialog(null, "El cliente ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Cliente cliente = new Cliente(nombre, nit);
+                controlClienteDAO.addCliente(cliente);
+                JOptionPane.showMessageDialog(null, "Cliente guardado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                new ClientModule();
+                dispose();
+            }
+        }
     }
 }

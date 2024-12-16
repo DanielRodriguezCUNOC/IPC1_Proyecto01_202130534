@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 public class ProductModule extends JFrame {
     ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     Utilidades util = new Utilidades();
-    DatosParaTabla datosTabla;
+    DatosParaTablaProductos datosTabla;
 
     public ProductModule() {
         //Configuracion de la ventana
@@ -21,10 +21,11 @@ public class ProductModule extends JFrame {
         getContentPane().setBackground(new Color(64, 64, 64));
 
         //Tabla de productos
-        datosTabla = new DatosParaTabla();
+        datosTabla = new DatosParaTablaProductos();
         JTable productsTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
         productsTable.setBounds(20, 50, 400, 180);
         productsTable.setRowHeight(30);
+        productsTable.setFont(util.getFont(1));
         productsTable.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0, false));
         JScrollPane tableScrollPane = new JScrollPane(productsTable);
         tableScrollPane.setBounds(20, 50, 400, 180);
@@ -56,7 +57,7 @@ public class ProductModule extends JFrame {
                     dispose();
                     break;
                 case 5:
-                    JOptionPane.showMessageDialog(this, "Reporte Productos Mas Vendidos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    new ReporteProductosMasVendidos();
                     break;
                 case 6:
                     new AdminView();
@@ -88,7 +89,7 @@ public class ProductModule extends JFrame {
 
     private void refreshTableData() {
         getContentPane().removeAll(); // Eliminar todos los componentes
-        datosTabla = new DatosParaTabla();
+        datosTabla = new DatosParaTablaProductos();
         JTable productsTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
         productsTable.setBounds(20, 50, 400, 180);
         productsTable.setRowHeight(30);

@@ -8,7 +8,9 @@ import java.awt.*;
 
 public class EditarCliente extends JFrame {
     Utilidades util = new Utilidades();
+    ControlClienteDAO controlClienteDAO = new ControlClienteDAO();
     JComboBox<String> clienteComboBox;
+    JTextField txtNit;
 
     public EditarCliente() {
         setTitle("Editar Cliente");
@@ -25,10 +27,16 @@ public class EditarCliente extends JFrame {
         lblNombre.setFont(util.getFont(1));
         add(lblNombre);
 
-        clienteComboBox = new JComboBox<>();
+        clienteComboBox = new JComboBox<>(controlClienteDAO.getNombresClientes().toArray(new String[0]));
         clienteComboBox.setBounds(120, 20, 200, 30);
-        clienteComboBox.addItem("Erwin Vásquez");
         clienteComboBox.setFont(util.getFont(1));
+        clienteComboBox.addActionListener(e -> {
+            String selectedClient = (String) clienteComboBox.getSelectedItem();
+            if (selectedClient != null) {
+                String nit = controlClienteDAO.getNIT(selectedClient);
+                txtNit.setText(nit);
+            }
+        });
         add(clienteComboBox);
 
         JLabel lblNit = new JLabel("Nit:");
@@ -37,7 +45,7 @@ public class EditarCliente extends JFrame {
         lblNit.setFont(util.getFont(1));
         add(lblNit);
 
-        JTextField txtNit = new JTextField();
+        txtNit = new JTextField();
         txtNit.setBounds(120, 70, 200, 30);
         txtNit.setFont(util.getFont(5));
         add(txtNit);
@@ -62,5 +70,9 @@ public class EditarCliente extends JFrame {
                 dispose();
             }
         });
+    }
+
+    private void editCliente() {
+
     }
 }

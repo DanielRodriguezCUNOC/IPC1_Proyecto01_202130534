@@ -1,16 +1,22 @@
 package com.cobra.ventas;
 
 import com.cobra.SaleModule;
+import com.cobra.clientes.ControlClienteDAO;
+import com.cobra.productos.ControlProductosDAO;
 import com.cobra.util.Utilidades;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class RealizarVenta extends JFrame {
+    private final ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
+    private final ControlVentasDAO controlVentasDAO = ControlVentasDAO.getInstance();
+    private final ControlClienteDAO controlClienteDAO = new ControlClienteDAO();
     private final Utilidades util = new Utilidades();
-    JComboBox<String> clienteComboBox;
-    JComboBox<String> productosComboBox;
-    JTextField txtCantidad;
+    private GenerarFactura generarFactura;
+    private JComboBox<String> clienteComboBox;
+    private JComboBox<String> productosComboBox;
+    private JTextField txtCantidad;
 
     public RealizarVenta() {
         setTitle("Realizar Venta");
@@ -27,9 +33,8 @@ public class RealizarVenta extends JFrame {
         lblNombreCliente.setFont(util.getFont(1));
         add(lblNombreCliente);
 
-        clienteComboBox = new JComboBox<>();
+        clienteComboBox = new JComboBox<>(controlClienteDAO.getNombresClientes().toArray(new String[0]));
         clienteComboBox.setBounds(120, 20, 200, 30);
-        clienteComboBox.addItem("Erwin Vásquez");
         clienteComboBox.setFont(util.getFont(1));
         add(clienteComboBox);
 
@@ -39,9 +44,8 @@ public class RealizarVenta extends JFrame {
         lblProducto.setFont(util.getFont(1));
         add(lblProducto);
 
-        productosComboBox = new JComboBox<>();
+        productosComboBox = new JComboBox<>(controlProductosDAO.getNombresProductos().toArray(new String[0]));
         productosComboBox.setBounds(120, 70, 200, 30);
-        productosComboBox.addItem("Producto 1");
         productosComboBox.setFont(util.getFont(1));
         add(productosComboBox);
 
@@ -71,10 +75,46 @@ public class RealizarVenta extends JFrame {
             int confirmation = JOptionPane.showConfirmDialog(null, "Desea agregar la compra?", "Guardar", JOptionPane.YES_NO_OPTION);
 
             if (confirmation == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Compra guardada");
+                generarVenta();
                 new SaleModule();
                 dispose();
             }
         });
+    }
+
+    private void generarVenta() {
+        //Obtener los datos de los campos
+        String nombreCliente = (String) clienteComboBox.getSelectedItem();
+        String nombreProducto = (String) productosComboBox.getSelectedItem();
+        String cantidadTexto = txtCantidad.getText();
+
+        //Validar que los campos no estén vacíos
+        if (nombreCliente == null || nombreProducto == null || cantidadTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
+            return;
+        }
+
+        int cantidad;
+        //Validar que la cantidad sea un número válido
+        try {
+            cantidad = Integer.parseInt(cantidadTexto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "La cantidad debe ser un número válido.");
+            return;
+        }
+
+        //Obtener el precio del producto y calcular el total de la venta
+        double precioUnitario = controlProductosDAO.getPrecioProducto(nombreProducto);
+        double totalVenta = precioUnitario * cantidad;
+        String fechaVenta = util.getFecha();
+
+        //Crear una nueva venta y agregarla a la lista de ventas
+        Venta venta = new Venta(nombreCliente, controlClienteDAO.getNIT(nombreCliente), fechaVenta, totalVenta);
+        controlVentasDAO.addVenta(venta);
+        controlVentasDAO.addProductosVendidos(nombreProducto, cantidad);
+        //Generamos la factura
+        generarFactura = new GenerarFactura();
+        generarFactura.crearFactura(nombreCliente, nombreProducto, cantidad, fechaVenta);
+        JOptionPane.showMessageDialog(null, "Venta agregada exitosamente.");
     }
 }

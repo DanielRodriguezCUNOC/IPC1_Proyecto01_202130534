@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 
 public class Utilidades {
 
@@ -36,6 +37,11 @@ public class Utilidades {
                 button.setForeground(Color.BLACK);
             }
         });
+    }
 
+    //Obtenemos la fecha actual del sistema
+    public String getFecha() {
+        LocalDateTime fecha = LocalDateTime.now();
+        return fecha.getDayOfMonth() + "-" + fecha.getMonthValue() + "-" + fecha.getYear();
     }
 }
