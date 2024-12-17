@@ -20,16 +20,18 @@ public class GenerarFactura {
 
             writer.write("<html lang=\"es\">");
             writer.write("<head>");
+            writer.write("<meta charset=\"UTF-8\">");
             writer.write("<title>Factura de Compra</title>");
             writer.write("<style>");
             writer.write("body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 20px; }");
             writer.write("h1, h2 { text-align: center; }");
             writer.write(".container { width: 80%; margin: auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }");
             writer.write(".detalle { margin: 20px 0; }");
+            writer.write(".detalle-cliente { text-align: center; margin: 20px 0; }");
             writer.write(".campo { margin: 10px 0; }");
             writer.write(".valor { font-weight: bold; }");
             writer.write(".table { width: 100%; border-collapse: collapse; margin: 20px 0; }");
-            writer.write(".table th, .table td { padding: 12px; border: 1px solid #ddd; text-align: left; }");
+            writer.write(".table th, .table td { padding: 12px; border: 1px solid #ddd; text-align: center; }");
             writer.write(".table th { background-color: #f2f2f2; color: #333; }");
             writer.write(".table tr:nth-child(even) { background-color: #f9f9f9; }");
             writer.write(".table tr:hover { background-color: #f1f1f1; }");
@@ -38,7 +40,7 @@ public class GenerarFactura {
             writer.write("<body>");
             writer.write("<div class='container'>");
             writer.write("<h1>Factura de Compra</h1>");
-            writer.write("<div class='detalle'>");
+            writer.write("<div class='detalle detalle-cliente'>");
             writer.write("<h2>Datos del Cliente</h2>");
             writer.write("<p class='campo'>Nombre: <span class='valor'>" + nombreCliente + "</span></p>");
             writer.write("<p class='campo'>NIT: <span class='valor'>" + controlClienteDAO.getNIT(nombreCliente) + "</span></p>");

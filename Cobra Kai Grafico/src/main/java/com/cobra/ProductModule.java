@@ -4,6 +4,7 @@ import com.cobra.productos.*;
 import com.cobra.util.Utilidades;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -23,6 +24,13 @@ public class ProductModule extends JFrame {
         //Tabla de productos
         datosTabla = new DatosParaTablaProductos();
         JTable productsTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
+        //Alinear los datos al centro
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < productsTable.getColumnCount(); i++) {
+            productsTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        productsTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         productsTable.setBounds(20, 50, 400, 180);
         productsTable.setRowHeight(30);
         productsTable.setFont(util.getFont(1));
@@ -91,6 +99,13 @@ public class ProductModule extends JFrame {
         getContentPane().removeAll(); // Eliminar todos los componentes
         datosTabla = new DatosParaTablaProductos();
         JTable productsTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
+        //Alinear los datos al centro
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < productsTable.getColumnCount(); i++) {
+            productsTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        productsTable.getColumnModel().getColumn(0).setPreferredWidth(200);
         productsTable.setBounds(20, 50, 400, 180);
         productsTable.setRowHeight(30);
         productsTable.setFont(util.getFont(1));

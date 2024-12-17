@@ -48,7 +48,7 @@ public class DeserializarObjetos {
             System.out.println("Productos cargados con éxito.");
             //Archivo vacío
         } catch (EOFException ae) {
-            System.out.println("No hay clientes registrados.");
+            System.out.println("No hay productos registrados.");
             //Si no encuentra la clase Producto o no puede leer el archivo
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace(System.err);
@@ -64,7 +64,7 @@ public class DeserializarObjetos {
             System.out.println("Ventas cargadas con éxito.");
             //Archivo vacío
         } catch (EOFException ae) {
-            System.out.println("No hay clientes registrados.");
+            System.out.println("No hay ventas registradas.");
             //Si no encuentra la clase Cliente o no puede leer el archivo
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace(System.err);

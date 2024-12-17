@@ -56,6 +56,10 @@ public class ControlVentasDAO {
         //this.listadoVentas.clear();
         if (ventas != null && !ventas.isEmpty()) {
             this.listadoVentas.addAll(ventas);
+            //Al momento de cargar las ventas se actualiza el contador de ventas
+            for (Venta venta : listadoVentas) {
+                contadorVentas++;
+            }
         }
     }
 }

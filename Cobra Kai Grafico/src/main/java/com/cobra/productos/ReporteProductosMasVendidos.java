@@ -67,13 +67,14 @@ public class ReporteProductosMasVendidos {
 
             writer.write("<html lang=\"es\">");
             writer.write("<head>");
+            writer.write("<meta charset=\"UTF-8\">");
             writer.write("<title>Reporte de productos más vendidos</title>");
             writer.write("<style>");
             writer.write("body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 20px; }");
             writer.write("h1 { text-align: center; }");
             writer.write(".container { width: 80%; margin: auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }");
             writer.write("table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 2px 3px rgba(0,0,0,0.1); }");
-            writer.write("table th, table td { padding: 12px; border: 1px solid #ddd; text-align: left; }");
+            writer.write("table th, table td { padding: 12px; border: 1px solid #ddd; text-align: center; }");
             writer.write("table th { background-color: #f2f2f2; color: #333; }");
             writer.write("table tr:nth-child(even) { background-color: #f9f9f9; }");
             writer.write("table tr:hover { background-color: #f1f1f1; }");

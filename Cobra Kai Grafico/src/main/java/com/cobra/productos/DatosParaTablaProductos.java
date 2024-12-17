@@ -3,7 +3,7 @@ package com.cobra.productos;
 import java.util.List;
 
 public class DatosParaTablaProductos {
-    String[] columnName = {"Nombre", "Precio", "Stock"};
+    String[] columnName = {"Producto", "Precio", "Stock"};
     ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
     /*Creamos un arreglo bidimiensional donde: el primer corchete es el numero de filas y el segundo el numero de columnas
      Por ejemplo:

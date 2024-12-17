@@ -26,12 +26,13 @@ public class ReporteHistoricoVentas {
             bw.write("<!DOCTYPE html>");
             bw.write("<html lang=\"es\">");
             bw.write("<head>");
+            bw.write("<meta charset=\"UTF-8\">");
             bw.write("<title>Reporte Histórico de Ventas</title>");
             bw.write("<style>");
             bw.write("body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; margin: 0; padding: 20px; }");
             bw.write("h1, h2 { text-align: center; }");
             bw.write("table { width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 2px 3px rgba(0,0,0,0.1); }");
-            bw.write("table th, table td { padding: 12px; border: 1px solid #ddd; text-align: left; }");
+            bw.write("table th, table td { padding: 12px; border: 1px solid #ddd; text-align: center; }");
             bw.write("table th { background-color: #f2f2f2; color: #333; }");
             bw.write("table tr:nth-child(even) { background-color: #f9f9f9; }");
             bw.write("table tr:hover { background-color: #f1f1f1; }");

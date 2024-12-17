@@ -124,7 +124,7 @@ public class RealizarVenta extends JFrame {
             generarFactura.crearFactura(nombreCliente, nombreProducto, cantidad, fechaVenta);
             JOptionPane.showMessageDialog(null, "Venta agregada exitosamente.");
         } else {
-            JOptionPane.showMessageDialog(null, "No hay stock suficiente.");
+            JOptionPane.showMessageDialog(null, "No hay stock suficiente o la cantidad es inválida.");
         }
 
 

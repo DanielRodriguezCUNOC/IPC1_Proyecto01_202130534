@@ -1,9 +1,11 @@
 package com.cobra;
 
 import com.cobra.clientes.DatosParaTablaCliente;
+import com.cobra.manejodatos.SerializarObjetos;
 import com.cobra.util.Utilidades;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -31,6 +33,13 @@ public class AdminView extends JFrame {
         // Tabla de clientes
         datosTabla = new DatosParaTablaCliente();
         JTable clientTable = new JTable(datosTabla.getData(), datosTabla.getColumns());
+        //Alinear los datos al centro
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < clientTable.getColumnCount(); i++) {
+            clientTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        clientTable.getColumnModel().getColumn(0).setPreferredWidth(100);
         clientTable.setBounds(20, 50, 400, 100);
         clientTable.setRowHeight(30);
         clientTable.setFont(util.getFont(1));
@@ -96,7 +105,12 @@ public class AdminView extends JFrame {
             switch (option) {
                 case 1:
                     //Lógica para guardar información
-                    JOptionPane.showMessageDialog(this, "Info Guardada", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    try {
+                        new SerializarObjetos();
+                        JOptionPane.showMessageDialog(null, "Información guardada con éxito");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error al guardar la información");
+                    }
                     break;
                 case 2:
                     //Lógica para cerrar sesión
