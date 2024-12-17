@@ -17,7 +17,7 @@ public class CrearProducto extends JFrame {
     public CrearProducto() {
         setTitle("Crear Producto");
         setSize(500, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(new Color(64, 64, 64));
         setLocationRelativeTo(null);

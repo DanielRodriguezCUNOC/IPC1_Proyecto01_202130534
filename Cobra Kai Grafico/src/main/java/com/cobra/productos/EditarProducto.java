@@ -16,7 +16,7 @@ public class EditarProducto extends JFrame {
     public EditarProducto() {
         setTitle("Editar Producto");
         setSize(700, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(new Color(64, 64, 64));
         setLocationRelativeTo(null);

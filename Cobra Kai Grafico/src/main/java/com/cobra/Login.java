@@ -71,7 +71,7 @@ public class Login extends JFrame {
             String user = userField.getText();
             String pass = new String(passField.getPassword());
 
-            if (user.equals("admin") && pass.equals("1234")) {
+            if (user.equals("sensei_202130534") && pass.equals("ipc1_202130534")) {
                 int opcion = JOptionPane.showConfirmDialog(this, "Login exitoso!", "Éxito", JOptionPane.OK_CANCEL_OPTION);
                 if (opcion == JOptionPane.OK_OPTION) {
                     new AdminView(); //Iniciamos la vista de administrador

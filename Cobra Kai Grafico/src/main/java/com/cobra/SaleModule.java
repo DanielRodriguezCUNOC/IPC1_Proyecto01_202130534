@@ -52,6 +52,7 @@ public class SaleModule extends JFrame {
             switch (option) {
                 case 1:
                     new RealizarVenta();
+                    dispose();
                     break;
                 case 2:
                     new ReporteHistoricoVentas();

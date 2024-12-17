@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class ProductModule extends JFrame {
     ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
@@ -80,6 +81,9 @@ public class ProductModule extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Carga Masiva de Productos");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        // Configura el directorio inicial como la carpeta del proyecto
+        File directorioInicial = new File(System.getProperty("user.dir") + "/DATA/SUBIRPRODUCTOS/");
+        fileChooser.setCurrentDirectory(directorioInicial);
         int seleccion = fileChooser.showOpenDialog(this);
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             String ruta = fileChooser.getSelectedFile().getAbsolutePath();

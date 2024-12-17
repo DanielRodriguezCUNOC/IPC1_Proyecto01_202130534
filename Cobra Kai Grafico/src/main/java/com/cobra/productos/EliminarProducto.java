@@ -15,7 +15,7 @@ public class EliminarProducto extends JFrame {
     public EliminarProducto() {
         setTitle("Eliminar Producto");
         setSize(500, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(new Color(64, 64, 64));
         setLocationRelativeTo(null);

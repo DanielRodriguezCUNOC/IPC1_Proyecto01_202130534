@@ -21,7 +21,7 @@ public class RealizarVenta extends JFrame {
     public RealizarVenta() {
         setTitle("Realizar Venta");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
         getContentPane().setBackground(new Color(64, 64, 64));
         setLocationRelativeTo(null);
@@ -76,6 +76,9 @@ public class RealizarVenta extends JFrame {
 
             if (confirmation == JOptionPane.YES_OPTION) {
                 generarVenta();
+            }
+            int option = JOptionPane.showConfirmDialog(null, "Desea realizar otra venta?", "Otra venta", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.NO_OPTION) {
                 new SaleModule();
                 dispose();
             }

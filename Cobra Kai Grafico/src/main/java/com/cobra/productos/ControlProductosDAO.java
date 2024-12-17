@@ -76,7 +76,7 @@ public class ControlProductosDAO {
 
     public void editarProducto(String nombre, double precio, int stock) {
         for (Producto producto : listadoProductos) {
-            if (producto.getNombre().equals(nombre) && precio >= 0 && stock >= 0) {
+            if (producto.getNombre().equals(nombre) && precio > 0 && stock >= 0) {
                 producto.setPrecio(precio);
                 producto.setStock(stock);
                 confirmarAccion = true;
@@ -88,7 +88,7 @@ public class ControlProductosDAO {
     }
 
     public void addMasiveProducts(Producto producto) {
-        if (!productExists(producto.getNombre()) && validarNombreProducto(producto.getNombre()) && producto.getPrecio() >= 0 && producto.getStock() >= 0) {
+        if (!productExists(producto.getNombre()) && validarNombreProducto(producto.getNombre()) && producto.getPrecio() > 0 && producto.getStock() >= 0) {
             listadoProductos.add(producto);
         } else {
             System.out.println("Error al cargar el producto");
@@ -102,7 +102,7 @@ public class ControlProductosDAO {
     }
 
     public void addProductoIndividual(String nombre, double precio, int stock) {
-        if (!productExists(nombre) && precio >= 0 && stock >= 0) {
+        if (!productExists(nombre) && precio > 0 && stock >= 0) {
             Producto producto = new Producto(nombre, precio, stock);
             listadoProductos.add(producto);
             confirmarAccion = true;

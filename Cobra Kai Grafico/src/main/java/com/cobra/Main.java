@@ -9,7 +9,6 @@ public class Main {
         //Intentamos cargar los datos de los archivos
         try {
             new DeserializarObjetos();
-            JOptionPane.showMessageDialog(null, "Datos cargados con éxito");
         } catch (Exception e) {
             e.printStackTrace(System.err);
             JOptionPane.showMessageDialog(null, "Error al cargar los datos", "Error", JOptionPane.ERROR_MESSAGE);
