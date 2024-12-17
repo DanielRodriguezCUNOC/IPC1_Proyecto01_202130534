@@ -44,7 +44,7 @@ public class SerializarObjetos {
     public void guardarProductosEnArchivo() {
         String nombreArchivo = "DATA/ALMACENAR_PRODUCTOS/productos.dat";
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
-            oos.writeObject(controlProductosDAO.getProductos());
+            oos.writeObject(controlProductosDAO.getListadoProductos());
             System.out.println("Productos guardados con éxito.");
         } catch (IOException e) {
             e.printStackTrace(System.err);

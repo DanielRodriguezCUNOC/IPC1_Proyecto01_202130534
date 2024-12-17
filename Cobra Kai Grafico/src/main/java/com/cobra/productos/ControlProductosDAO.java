@@ -3,12 +3,12 @@ package com.cobra.productos;
 import java.util.ArrayList;
 
 public class ControlProductosDAO {
-    private final ArrayList<Producto> productos;
+    private final ArrayList<Producto> listadoProductos;
     public static ControlProductosDAO instance;
     private boolean confirmarAccion = false;
 
     public ControlProductosDAO() {
-        productos = new ArrayList<>();
+        listadoProductos = new ArrayList<>();
     }
 
     public static ControlProductosDAO getInstance() {
@@ -22,14 +22,14 @@ public class ControlProductosDAO {
 
     public ArrayList<String> getNombresProductos() {
         ArrayList<String> nombres = new ArrayList<>();
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             nombres.add(producto.getNombre());
         }
         return nombres;
     }
 
     public double getPrecioProducto(String nombre) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equals(nombre)) {
                 return producto.getPrecio();
             }
@@ -38,7 +38,7 @@ public class ControlProductosDAO {
     }
 
     public int getStockProducto(String nombre) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equals(nombre)) {
                 return producto.getStock();
             }
@@ -47,16 +47,16 @@ public class ControlProductosDAO {
     }
 
     public void deleteProducto(String nombre) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equals(nombre)) {
-                productos.remove(producto);
+                listadoProductos.remove(producto);
                 break;
             }
         }
     }
 
     public boolean productExists(String nombre) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equalsIgnoreCase(nombre)) {
                 return true;
             }
@@ -64,17 +64,9 @@ public class ControlProductosDAO {
         return false;
     }
 
-    public int getStock(String nombre) {
-        for (Producto producto : productos) {
-            if (producto.getNombre().equals(nombre)) {
-                return producto.getStock();
-            }
-        }
-        return 0;
-    }
 
     public void restarStock(String nombre, int cantidad) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equals(nombre)) {
                 producto.setStock(producto.getStock() - cantidad);
                 break;
@@ -83,7 +75,7 @@ public class ControlProductosDAO {
     }
 
     public void editarProducto(String nombre, double precio, int stock) {
-        for (Producto producto : productos) {
+        for (Producto producto : listadoProductos) {
             if (producto.getNombre().equals(nombre) && precio >= 0 && stock >= 0) {
                 producto.setPrecio(precio);
                 producto.setStock(stock);
@@ -97,7 +89,7 @@ public class ControlProductosDAO {
 
     public void addMasiveProducts(Producto producto) {
         if (!productExists(producto.getNombre()) && validarNombreProducto(producto.getNombre()) && producto.getPrecio() >= 0 && producto.getStock() >= 0) {
-            productos.add(producto);
+            listadoProductos.add(producto);
         } else {
             System.out.println("Error al cargar el producto");
         }
@@ -112,19 +104,26 @@ public class ControlProductosDAO {
     public void addProductoIndividual(String nombre, double precio, int stock) {
         if (!productExists(nombre) && precio >= 0 && stock >= 0) {
             Producto producto = new Producto(nombre, precio, stock);
-            productos.add(producto);
+            listadoProductos.add(producto);
             confirmarAccion = true;
         } else {
             confirmarAccion = false;
         }
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public ArrayList<Producto> getListadoProductos() {
+        return listadoProductos;
     }
 
     public boolean getConfirmarAccion() {
         return confirmarAccion;
+    }
+
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        //this.listadoProductos.clear();
+        if (listaProductos != null && !listaProductos.isEmpty()) {
+            this.listadoProductos.addAll(listaProductos);
+        }
     }
 
 }

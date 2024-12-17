@@ -51,4 +51,11 @@ public class ControlVentasDAO {
     public void incrementarContadorVentas() {
         contadorVentas++;
     }
+
+    public void setListaVentas(ArrayList<Venta> ventas) {
+        //this.listadoVentas.clear();
+        if (ventas != null && !ventas.isEmpty()) {
+            this.listadoVentas.addAll(ventas);
+        }
+    }
 }

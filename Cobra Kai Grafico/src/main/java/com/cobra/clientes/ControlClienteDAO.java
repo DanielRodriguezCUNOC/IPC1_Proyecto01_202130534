@@ -71,4 +71,12 @@ public class ControlClienteDAO {
         }
     }
 
+    //Metodo para obtener una lista de clientes
+    public void setListaClientes(ArrayList<Cliente> listadoClientes) {
+        //this.listadoClientes.clear();
+        if (listadoClientes != null && !listadoClientes.isEmpty()) {
+            this.listadoClientes.addAll(listadoClientes);
+        }
+    }
+
 }

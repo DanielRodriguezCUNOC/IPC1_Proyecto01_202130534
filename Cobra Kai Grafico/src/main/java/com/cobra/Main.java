@@ -2,10 +2,12 @@ package com.cobra;
 
 import com.cobra.clientes.Cliente;
 import com.cobra.clientes.ControlClienteDAO;
+import com.cobra.manejodatos.DeserializarObjetos;
 import com.cobra.productos.ControlProductosDAO;
 
 public class Main {
     public static void main(String[] args) {
+        new DeserializarObjetos();
         ControlProductosDAO controlProductosDAO = ControlProductosDAO.getInstance();
         ControlClienteDAO controlClienteDAO = ControlClienteDAO.getInstance();
         controlProductosDAO.addProductoIndividual("Coca Cola", 5.5, 5);
