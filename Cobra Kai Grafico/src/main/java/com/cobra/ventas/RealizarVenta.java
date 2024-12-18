@@ -27,7 +27,7 @@ public class RealizarVenta extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        JLabel lblNombreCliente = new JLabel("Nombre:");
+        JLabel lblNombreCliente = new JLabel("Cliente:");
         lblNombreCliente.setBounds(20, 20, 100, 30);
         lblNombreCliente.setForeground(Color.WHITE);
         lblNombreCliente.setFont(util.getFont(1));

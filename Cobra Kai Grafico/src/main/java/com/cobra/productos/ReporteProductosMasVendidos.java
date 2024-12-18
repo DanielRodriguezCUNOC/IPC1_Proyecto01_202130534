@@ -85,7 +85,8 @@ public class ReporteProductosMasVendidos {
             writer.write("<h1>Reporte de productos más vendidos</h1>");
             writer.write("<table>");
             writer.write("<tr><th>Producto</th><th>Precio (Q)</th><th>Cantidad vendida</th></tr>");
-            for (ProductoVendido producto : productosVendidos) {
+            for (int i = 0; i < Math.min(5, productosVendidos.size()); i++) {
+                ProductoVendido producto = productosVendidos.get(i);
                 writer.write("<tr>");
                 writer.write("<td>" + producto.getNombreProducto() + "</td>");
                 writer.write("<td>Q" + String.format("%.2f", producto.getPrecioUnitario()) + "</td>");
