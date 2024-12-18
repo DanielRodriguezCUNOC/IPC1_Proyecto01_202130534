@@ -71,7 +71,7 @@ public class ControlClienteDAO {
         }
     }
 
-    //Metodo para obtener una lista de clientes
+    //Metodo para agregar elementos de otra lista a nuestro listado de clientes
     public void setListaClientes(ArrayList<Cliente> listadoClientes) {
         //this.listadoClientes.clear();
         if (listadoClientes != null && !listadoClientes.isEmpty()) {

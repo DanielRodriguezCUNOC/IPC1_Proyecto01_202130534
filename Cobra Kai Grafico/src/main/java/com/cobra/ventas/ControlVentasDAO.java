@@ -53,11 +53,10 @@ public class ControlVentasDAO {
     }
 
     public void setListaVentas(ArrayList<Venta> ventas) {
-        //this.listadoVentas.clear();
         if (ventas != null && !ventas.isEmpty()) {
             this.listadoVentas.addAll(ventas);
             //Al momento de cargar las ventas se actualiza el contador de ventas
-            for (Venta venta : listadoVentas) {
+            for (int i = 0; i < listadoVentas.size(); i++) {
                 contadorVentas++;
             }
         }

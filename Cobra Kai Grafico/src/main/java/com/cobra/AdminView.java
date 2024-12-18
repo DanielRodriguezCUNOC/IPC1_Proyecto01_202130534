@@ -100,11 +100,9 @@ public class AdminView extends JFrame {
 
     private void eventosBotones(JButton button, int option) {
         util.efectosBotones(button);
-        //Agregar funcionalidad a los botones
         button.addActionListener((ActionEvent e) -> {
             switch (option) {
                 case 1:
-                    //Lógica para guardar información
                     try {
                         new SerializarObjetos();
                         JOptionPane.showMessageDialog(null, "Información guardada con éxito");
@@ -113,22 +111,18 @@ public class AdminView extends JFrame {
                     }
                     break;
                 case 2:
-                    //Lógica para cerrar sesión
                     new Login();
                     dispose();
                     break;
                 case 3:
-                    //Lógica para abrir módulo de productos
                     new ProductModule();
                     dispose();
                     break;
                 case 4:
-                    //Lógica para abrir módulo de clientes
                     new ClientModule();
                     dispose();
                     break;
                 case 5:
-                    //Lógica para abrir módulo de ventas
                     new SaleModule();
                     dispose();
                     break;

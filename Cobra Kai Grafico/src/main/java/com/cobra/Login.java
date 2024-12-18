@@ -74,8 +74,10 @@ public class Login extends JFrame {
             if (user.equals("sensei_202130534") && pass.equals("ipc1_202130534")) {
                 int opcion = JOptionPane.showConfirmDialog(this, "Login exitoso!", "Éxito", JOptionPane.OK_CANCEL_OPTION);
                 if (opcion == JOptionPane.OK_OPTION) {
-                    new AdminView(); //Iniciamos la vista de administrador
-                    dispose();//Cerramos la ventana de login
+                    //Iniciamos la vista de administrador
+                    new AdminView();
+                    //Cerramos la ventana de login
+                    dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
